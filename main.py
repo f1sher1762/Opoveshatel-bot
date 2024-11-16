@@ -3,7 +3,7 @@ import re
 from telegram import Update, ParseMode
 from telegram.ext import Updater, MessageHandler, Filters, CallbackContext
 
-chat_id = -4509208587  # настойщий айди чата
+chat_id = -4543242342342423423423423427  # настойщий айди чата
 duty_schedule = ['Иванов', 'Иванов', 'Иванов', 'Иванов', 'Иванов']
 corporate_links = [
     'https://t.me/Иванов',
@@ -43,7 +43,7 @@ def handle_text_message(update: Update, context: CallbackContext):
         current_duty(update, context)
 
 def main():
-    updater = Updater("7539124014:AAGekjZrKUuBCP8-f1nP_aKo_RgO8aNhwXg", use_context=True)  # вставьте токен бота
+    updater = Updater("654645645gfd756hfgh765646546456456hfghfg765756756", use_context=True)  # вставьте токен бота
     dispatcher = updater.dispatcher
     dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, handle_text_message))
 
