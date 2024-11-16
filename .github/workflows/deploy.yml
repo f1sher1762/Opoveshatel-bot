@@ -1,0 +1,33 @@
+name: Deploy to GitHub on server changes
+
+on:
+  push:
+    branches:
+      - main  # или другая ветка
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout the repository
+      uses: actions/checkout@v2
+
+    - name: Set up SSH key for deployment
+      run: |
+        mkdir -p ~/.ssh
+        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Add GitHub to known hosts
+      run: ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+    - name: Push changes to GitHub
+      run: |
+        git config --global user.name "your_username"
+        git config --global user.email "your_email@example.com"
+        git add .
+        git commit -m "Auto commit from server"
+        git push origin main
