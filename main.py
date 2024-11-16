@@ -7,7 +7,7 @@ chat_id = -1000000000000  # настойщий айди чата
 duty_schedule = ['Иванов', 'Иванов', 'Иванов', 'Иванов', 'Иванов']
 corporate_links = [
     'https://t.me/Иванов',
-    'https://t.me/Иванов',
+    'https://t.me/сидоров',
     'https://t.me/Иванов',
     'https://t.me/Иванов',
     'https://t.me/Иванов'
