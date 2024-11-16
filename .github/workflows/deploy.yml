@@ -1,33 +1,29 @@
-name: Deploy to GitHub on server changes
-
-on:
-  push:
-    branches:
-      - master  # или другая ветка
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout the repository
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up SSH key for deployment
-      run: |
-        mkdir -p ~/.ssh
-        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
 
-    - name: Add GitHub to known hosts
-      run: ssh-keyscan github.com >> ~/.ssh/known_hosts
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
 
-    - name: Push changes to GitHub
-      run: |
-        git config --global user.name "your_username"
-        git config --global user.email "your_email@example.com"
-        git add .
-        git commit -m "Auto commit from server"
-        git push origin main
+      - name: Check if changes exist
+        run: |
+          git diff --exit-code || echo "Changes detected, proceeding with commit"
+      
+      - name: Commit changes
+        run: |
+          git config --global user.name "your_username"
+          git config --global user.email "your_email@example.com"
+          git add .
+          git commit -m "Automated commit"
+          git push origin master
+        if: success() && github.event_name != 'push'
