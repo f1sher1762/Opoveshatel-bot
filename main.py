@@ -8,7 +8,7 @@ duty_schedule = ['Иванов', 'Иванов', 'Иванов', 'Иванов',
 corporate_links = [
     'https://t.me/Иванов',
     'https://t.me/сидоров',
-    'https://t.me/Иванов',
+    'https://t.me/петров',
     'https://t.me/Иванов',
     'https://t.me/Иванов'
 ]  # Замените на настоящие ссылки
