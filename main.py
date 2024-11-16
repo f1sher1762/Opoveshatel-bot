@@ -3,23 +3,23 @@ import re
 from telegram import Update, ParseMode
 from telegram.ext import Updater, MessageHandler, Filters, CallbackContext
 
-chat_id = -1001195761916  # Замените на фактический ID вашего чата
-duty_schedule = ['Зубакин', 'Есин', 'Леманн', 'Галиев', 'Халиуллин']
+chat_id = -1000000000000  # настойщий айди чата
+duty_schedule = ['Иванов', 'Иванов', 'Иванов', 'Иванов', 'Иванов']
 corporate_links = [
-    'https://t.me/Jeddit1999',
-    'https://t.me/reallee7741',
-    'https://t.me/GeniusAl',
-    'https://t.me/dgFisher',
-    'https://t.me/drinkin1water'
-]  # Замените на фактические ссылки
+    'https://t.me/Иванов',
+    'https://t.me/Иванов',
+    'https://t.me/Иванов',
+    'https://t.me/Иванов',
+    'https://t.me/Иванов'
+]  # Замените на настоящие ссылки
 
 def current_duty(update: Update, context: CallbackContext):
     current_date = datetime.date.today()
-    current_week = (current_date.day - 1) // 7  # Определение текущей недели
+    current_week = (current_date.day - 1) // 7  # текущая неделя
     current_duty_person = duty_schedule[current_week]
     current_duty_link = corporate_links[current_week]
 
-    next_week = (current_week + 1) % len(duty_schedule)  # Определение следующей недели
+    next_week = (current_week + 1) % len(duty_schedule)  
     next_duty_person = duty_schedule[next_week]
     next_duty_link = corporate_links[next_week]
 
@@ -43,7 +43,7 @@ def handle_text_message(update: Update, context: CallbackContext):
         current_duty(update, context)
 
 def main():
-    updater = Updater("6324485925:AAFNX1RsgwhXe8zxFbr1DcX3OMJ6MpHYWpU", use_context=True)  # Замените на фактический токен вашего бота
+    updater = Updater("ХХХХХХХХХХХХХХХХХХХХХХХХХХХХХХХХ", use_context=True)  # вставьте токен бота
     dispatcher = updater.dispatcher
     dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, handle_text_message))
 
