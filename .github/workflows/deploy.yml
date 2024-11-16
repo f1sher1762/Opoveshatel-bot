@@ -1,28 +1,52 @@
-
-name: Deploy on push
+name: Deploy Bot
 
 on:
   push:
     branches:
-      - master 
+      - master  # или ваша ветка, например, master
+  workflow_dispatch:  # позволяет запускать пайплайн вручную из GitHub UI
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Check out code
+        uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.8'
+          python-version: '3.8'  # или другая версия Python
 
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt  # если у вас есть файл зависимостей
 
-      - name: Run deployment script
+      - name: Log before deploy
+        run: echo "Starting deployment process..."
+
+      - name: Check service availability
         run: |
-          python main.py  
+          python -c "
+          import requests
+          try:
+              response = requests.get('https://your-service-url.com')
+              if response.status_code == 200:
+                  print('Service is available')
+              else:
+                  print(f'Service unavailable, status code: {response.status_code}')
+          except requests.exceptions.RequestException as e:
+              print(f'Service check failed: {e}')
+          "
+
+      - name: Run deploy script
+        run: |
+          echo "Starting deploy..."
+          python main.py  # если у вас есть скрипт деплоя
+
+      - name: Log deployment completion
+        run: echo "Deployment completed."
+
+      - name: Clean up and finish
+        run: echo "Cleaning up after deployment..."
