@@ -4,7 +4,7 @@ name: Deploy on push
 on:
   push:
     branches:
-      - master  # или укажите другую ветку
+      - master 
 
 jobs:
   deploy:
@@ -25,4 +25,4 @@ jobs:
 
       - name: Run deployment script
         run: |
-          python deploy.py  # или ваш скрипт для деплоя
+          python main.py  
