@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt  # если у вас есть файл зависимостей
+          pip install -r requirements.txt  
 
       - name: Log before deploy
         run: echo "Starting deployment process..."
